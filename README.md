@@ -1,86 +1,66 @@
-﻿<div align="center">
-
-# 🛡️ سِتر | SATR Enterprise
-### منصة التواصل المؤسسي والبنكي المشفرة بتقنية العمى التام (Blind Zero-Knowledge E2EE)
-
-[![Architecture](https://img.shields.io/badge/Architecture-Blind%20Zero--Knowledge-10b981?style=for-the-badge)]()
-[![Encryption](https://img.shields.io/badge/Encryption-Dual--Layer%20P--256%20%2B%20AES--256--GCM-0f172a?style=for-the-badge)]()
-[![Storage](https://img.shields.io/badge/Server%20Storage-Zero%20Data%20at%20Rest-ef4444?style=for-the-badge)]()
-[![Deployment](https://img.shields.io/badge/Deployment-Cloud%20%26%20Air--Gapped%20On--Premise-3b82f6?style=for-the-badge)]()
-
-**نظام تواصل فائق الأمان مصمم خصيصاً للشركات، المؤسسات الكبرى، والبنوك — حيث لا يملك الخادم (Server) أي قدرة تقنية على قراءة الرسائل أو معرفة هوية الموظفين أو الاحتفاظ بسجلات المحادثات.**
-
-[طلب عرض سعر وتفعيل ترخيص مؤسسي](#-طلب-ترخيص-مؤسسي-أو-نسخة-البنوك) • [المميزات الأمنية](#-الركائز-الأمنية-والمعمارية) • [معاينة الواجهات](#-معاينة-واجهات-المنصة) • [باقات الشركات والبنوك](#-نماذج-التعاقد-والنشر)
-
-</div>
-
----
-
-## 🔒 الركائز الأمنية والمعمارية
-
-* **تشفير طرفي ثنائي الطبقة (Dual-Layer E2EE `v2`):**
-  * توليد مفاتيح هوية غير قابلة للتصدير (`Non-Extractable P-256 ECDH`) داخل متصفح/جهاز كل موظف (`IndexedDB`).
-  * اشتقاق مفتاح جلسة مؤقت مستقل لكل رسالة (`Per-Message Ephemeral P-256` + `HKDF-SHA-384`) مع تشفير `AES-256-GCM` وربط سياقي (`AAD`) يمنع التلاعب أو إعادة الإرسال (`Replay Protection`).
-  * تغليف الحزم (`512-byte Traffic Padding`) لإخفاء الطول الحقيقي للرسائل ومنع تحليل حركة البيانات.
-* **معمارية العمى التام وانعدام التخزين (Blind Zero-Knowledge & Zero-Storage):**
-  * **لا رسائل على السيرفر:** يعمل الخادم كوسيط ذاكرة مؤقت (`In-Memory RAM Relay`) يحذف الحزم المشفرة فور تسليمها، مع حفظ السجل المشفر محلياً على جهاز الموظف فقط وزر مسح فوري للطوارئ (`Panic Wipe`).
-  * **إخفاء الهويات والـ IP:** لا يُخزَّن أي بريد إلكتروني صريح في قاعدة البيانات (`HMAC-SHA256 Blind Identity`)، مع تعطيل تسجيل عناوين الـ IP في سجلات الخادم و`Nginx`.
-* **فصل الصلاحيات المؤسسي (Strict Role Separation):**
-  * **مدير الشركة (`/org-admin`):** تحكم كامل في فرق العمل، الأقسام، صلاحيات الانضمام، وإدارة المقاعد داخل المؤسسة دون تدخل من مزود الخدمة.
-  * **مزود المنصة (`/admin`):** إدارة التراخيص والمقاعد فقط دون أي وصول لقوائم الموظفين أو مجموعاتهم الداخلية.
-* **بوابة حماية صارمة (Environment & Anti-Bot Shield):**
-  * حظر أدوات السحب والفحص الآلي، واقتصار التشغيل على أنظمة التشغيل الحديثة (`Windows 10+`، `Android 10+`، `iOS 15+`، `macOS 12+`) والمتصفحات الموثقة.
-
----
-
-## 📸 معاينة واجهات المنصة
-
 <div align="center">
 
-### 1. الواجهة الرئيسية وباقات الشركات والبنوك
-<img src="./assets/01_landing_b2b_tiers.png" alt="واجهة منصة ستر الرئيسية" width="850" />
+**Language:** **English** | [Deutsch](README.de.md)
 
-<br/><br/>
+# SATR Enterprise
+### Blind Zero-Knowledge E2EE Messaging Platform for Enterprises, Sovereign Entities & Banks
 
-### 2. نموذج طلب ترخيص مؤسسي (B2B Contract Flow)
-<img src="./assets/02_license_inquiry_modal.png" alt="طلب ترخيص مؤسسي" width="850" />
-
-<br/><br/>
-
-### 3. تطبيق سقف المقاعد الصارم للمؤسسات (Seat Cap Governance)
-<img src="./assets/03_seat_cap_rejected.png" alt="حماية سقف المقاعد" width="850" />
-
-<br/><br/>
-
-### 4. تنبيه فترة السماح المرنة دون فقدان البيانات (Grace Period)
-<img src="./assets/04_grace_period_banner.png" alt="فترة السماح للترخيص" width="850" />
-
-<br/><br/>
-
-### 5. استعادة مساحة العمل بالكامل بعد التجديد
-<img src="./assets/05_renewal_restored.png" alt="استعادة مساحة العمل" width="850" />
+[![Security Architecture](https://img.shields.io/badge/Architecture-Blind%20Zero--Knowledge-0f172a?style=for-the-badge)](#core-security-architecture)
+[![Encryption](https://img.shields.io/badge/Encryption-Dual--Layer%20P--256%20%2B%20AES--256--GCM-2563eb?style=for-the-badge)](#core-security-architecture)
+[![Deployment](https://img.shields.io/badge/Deployment-Enterprise%20Cloud%20%7C%20Air--Gapped%20On--Premise-059669?style=for-the-badge)](#institutional-licensing--deployment-tiers)
 
 </div>
 
 ---
 
-## 🏢 نماذج التعاقد والنشر (B2B & Banking)
+## Overview
 
-تُقدَّم منصة **سِتر (Satr)** حصرياً عبر عقود ترخيص رسمية للجهات الاعتبارية:
+**SATR Enterprise** is an institutional-grade, end-to-end encrypted (E2EE) messaging platform engineered specifically for organizations, regulated institutions, and banking environments where metadata leaks, server-side message retention, or third-party cloud exposure are unacceptable.
 
-| النموذج | الفئة المستهدفة | آلية النشر والتشغيل |
+Unlike conventional enterprise chat tools that store message histories or rely on server-managed keys, SATR operates as a **Blind Zero-Knowledge Relay**: messages exist strictly in volatile memory during active delivery and are never persisted to disk.
+
+---
+
+## Core Security Architecture
+
+* **Dual-Layer End-to-End Encryption:** Non-extractable WebCrypto `ECDH P-256` device identity keys paired with per-message ephemeral `ECDH P-256` key exchange, `HKDF-SHA-384` k derivation, and `AES-256-GCM` authenticated encryption.
+* **Traffic Analysis Resistance:** Fixed 512-byte cryptographic padding obscures message length and communication patterns.
+* **True Zero-Storage Relay:** Zero message content, attachments, or conversation histories are ever written to server databases or disk storage.
+* **Blind Identity & Zero IP Logging:** User email identifiers are transformed into salted `HMAC-SHA256` digests before storage, and reverse-proxy access logs strip all client IP addresses.
+* **Strict Role & Governance Separation:** Company Administrators (`/org-admin`) manage internal teams, allowlisted employee hashes, and seat allocations without ever accessing cryptographic keys or plaintext content.
+
+---
+
+## Institutional Licensing & Deployment Tiers
+
+SATR Enterprise is licensed exclusively through formal B2B institutional contracts (no consumer checkout or self-serve credit card gateways):
+
+| Tier | Target Organizations | Infrastructure & Governance |
 | :--- | :--- | :--- |
-| **Enterprise Cloud** | الشركات والمؤسسات التجارية | مساحات عمل سحابية معزولة تماماً، تراخيص بعدد المقاعد، وفترة سماح مرنة عند التجديد السنوي. |
-| **Banking & Sovereign On-Premise** | البنوك والهيئات السيادية | نشر ذاتي كامل (`Docker / Air-Gapped`) داخل البنية التحتية الخاصة بالبنك دون خروج أي حزمة للشبكة الخارجية. |
+| **Enterprise Cloud** | Corporates, Legal Firms & Regulated Teams | Isolated multi-tenant blind relay, annual/semi-annual B2B contract & invoice, strict seat-cap enforcement, and `/org-admin` governance. |
+| **Banking & Sovereign On-Premise** | Banks, Financial Institutions & Sovereign Entities | Fully air-gapped Docker self-hosted deployment inside the institution's own private data center with zero external network egress and custom SLA; |
 
 ---
 
-## 📩 طلب ترخيص مؤسسي أو نسخة البنوك
+## Verified Platform Previews
 
-للحصول على عرض سعر، طلب نسخة تجريبية للمؤسسات، أو التعاقد على نسخة الاستضافة الذاتية للبنوك:
+### 1. B2B Enterprise & Banking Licensing Portal
+![B2B Enterprise & Banking Licensing Portal](assets/01_landing_b2b_tiers.png)
 
-* **المطور والمعماري للنظام:** [Ahmed Ali Soliman](https://github.com/Ahmed-Ali-Soliman)
+### 2. Privacy-Safe Institutional License Inquiry Flow
+*Generates a structured B2B contract inquiry locally without storing unverified lead PII on the blind relay..*
+![Privacy-Safe License Inquiry Modal](assets/02_license_inquiry_modal.png)
 
-<div align="center">
-<sub>© 2026 SATR Enterprise Security. جميع الحقوق محفوظة — الكود المصدري محمي بموجب حقوق الملكية الفكرية وتراخيص الاستخدام التجاري.</sub>
-</div>
+### 3. Strict Organization Seat-Cap Enforcement
+![Seat Limit Enforcement](assets/03_seat_cap_rejected.png)
+
+### 4. Non-Destructive Grace Period & Contract Renewal
+*Expired licenses enter a configurable waiting window that preserves employee accounts and allowlists without data loss, restoring full access immediately upon renewal.*
+![License Grace Period Banner](assets/04_grace_period_banner.png)
+![License Renewal Restored](assets/05_renewal_restored.png)
+
+---
+
+## Licensing & Institutional Inquiries
+
+To request an institutional deployment evaluation, architecture briefing, or custom banking SLA, launch the **Request Enterprise License** flow directly within the platform portal or contact the project maintainer via GitHub.
